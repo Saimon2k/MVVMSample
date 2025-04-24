@@ -1,0 +1,23 @@
+﻿<Window x:Class="MVVMSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMSample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="400">
+    <Grid>
+        <StackPanel Grid.ColumnSpan="2">
+            <TextBlock Text="Train Progress:" Margin="5"/>
+            <ProgressBar Value="{Binding Progress}" Height="20" Margin="5" Maximum="100"/>
+
+            <CheckBox Content="Left" IsChecked="{Binding Left}" Margin="5"/>
+            <CheckBox Content="Right" IsChecked="{Binding Right}" Margin="5"/>
+
+            <Button Content="Progress ++" Command="{Binding incProgressCommand}" Margin="5"/>
+
+            <TextBlock Text="{Binding User.Name}" Margin="5"/>
+            <CheckBox Content="User.Train.Right" IsChecked="{Binding User.Train.Right}" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
