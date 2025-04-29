@@ -10,8 +10,8 @@ namespace MVVMSample.ViewModel
         private readonly Train _train;
         private readonly ILogger<TrainViewModel>? _logger;
 
-        [ObservableProperty]
-        private UserViewModel _user;
+        //[ObservableProperty]
+        //private UserViewModel _user;
 
         public TrainViewModel(Train train, ILogger<TrainViewModel>? logger = null)
         {
@@ -19,7 +19,7 @@ namespace MVVMSample.ViewModel
 
             _logger?.LogTrace("TrainViewModel.ctor");
             _train = train;
-            _user = new() { Train = this };
+            //_user = new() { Train = this };
         }
 
         public int Progress
