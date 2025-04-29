@@ -14,7 +14,7 @@
             <CheckBox Content="Left" IsChecked="{Binding Left}" Margin="5"/>
             <CheckBox Content="Right" IsChecked="{Binding Right}" Margin="5"/>
 
-            <Button Content="Progress ++" Command="{Binding incProgressCommand}" Margin="5"/>
+            <Button Content="Progress ++" Command="{Binding ProgressCommand}" Margin="5"/>
 
             <TextBlock Text="{Binding User.Name}" Margin="5"/>
             <CheckBox Content="User.Train.Right" IsChecked="{Binding User.Train.Right}" Margin="5"/>

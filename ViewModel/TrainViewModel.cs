@@ -8,17 +8,17 @@ namespace MVVMSample.ViewModel
     public partial class TrainViewModel : ObservableObject
     {
         private readonly Train _train;
-        private readonly ILogger<TrainViewModel> _logger;
+        private readonly ILogger<TrainViewModel>? _logger;
 
         [ObservableProperty]
         private UserViewModel _user;
 
-        public TrainViewModel(ILogger<TrainViewModel> logger)
+        public TrainViewModel(Train train, ILogger<TrainViewModel>? logger = null)
         {
-            _logger = logger;
+            _logger = logger!;
 
-            _logger.LogTrace("TrainViewModel.ctor");
-            _train = new();
+            _logger?.LogTrace("TrainViewModel.ctor");
+            _train = train;
             _user = new() { Train = this };
         }
 
@@ -41,6 +41,10 @@ namespace MVVMSample.ViewModel
         }
 
         [RelayCommand]
-        private void incProgress() => Progress++;
+        private void OnProgress()
+        {
+            _train.OnProgress();
+            OnPropertyChanged(nameof(Progress));
+        }
     }
 }

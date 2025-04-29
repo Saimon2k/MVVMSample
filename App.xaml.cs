@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MVVMSample.ViewModel;
+﻿using MVVMSample.ViewModel;
 using System.Windows;
+using MVVMSample.Model;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MVVMSample
 {
@@ -10,31 +10,43 @@ namespace MVVMSample
     /// </summary>
     public partial class App : Application
     {
-        private IServiceProvider _provider;
-        private static IHost _host;
+        //public IServiceProvider Services { get; }
+
+        //public App()
+        //{
+            //Services = ConfigureServices();
+        //}
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // Настройка DI
-            _host = CreateHostBuilder(e.Args).Build();
-            _provider = _host.Services;
-            _host.RunAsync();
-
-            // Запуск главного окна
-            var mainWindow = _provider.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = _provider.GetRequiredService<TrainViewModel>();
+            MainWindow mainWindow = new() { DataContext = new TrainViewModel(new Train()) };
             mainWindow.Show();
+            // Запуск главного окна
+            //var mainWindow = Services.GetRequiredService<MainWindow>();
+            //mainWindow.DataContext = Services.GetRequiredService<TrainViewModel>();
+            //mainWindow.Show();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
-                {
-                    //services.AddDbContext<TrainContext>();
-                    services.AddSingleton<MainWindow>();
-                    services.AddSingleton<TrainViewModel>();
-                });
+        //private static IServiceProvider ConfigureServices()
+        //{
+        //    var services = new ServiceCollection();
+
+        //    services.AddSingleton<MainWindow>();
+        //    services.AddSingleton<TrainViewModel>();
+
+        //    return services.BuildServiceProvider();
+        //}
+
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureServices((hostContext, services) =>
+        //        {
+        //            //services.AddDbContext<TrainContext>();
+        //            services.AddSingleton<MainWindow>();
+        //            services.AddSingleton<TrainViewModel>();
+        //        });
     }
 
 }
